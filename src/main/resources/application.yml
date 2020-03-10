@@ -1,5 +1,14 @@
 spring:
   application:
-    name: finches-finchesservice
-  server:
-port: 80
+    name: finches-sservice
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: supervisor
+      password: root
+      database: finches
+server:
+  port: 80
+
+
