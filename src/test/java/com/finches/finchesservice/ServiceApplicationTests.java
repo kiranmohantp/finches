@@ -1,4 +1,4 @@
-package com.finches.service;
+package com.finches.finchesservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,5 +1,5 @@
 spring:
   application:
-    name: finches-service
+    name: finches-finchesservice
   server:
 port: 80

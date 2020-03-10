@@ -1,13 +1,13 @@
-package com.finches.service;
+package com.finches.finchesservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ServiceApplication {
+public class FinchesServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServiceApplication.class, args);
+		SpringApplication.run(FinchesServiceApplication.class, args);
 	}
 
 }
