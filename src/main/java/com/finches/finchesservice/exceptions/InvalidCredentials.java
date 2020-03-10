@@ -1,4 +1,4 @@
-package com.finches.finchesservice.Exceptions;
+package com.finches.finchesservice.exceptions;
 
 import com.finches.finchesservice.entities.UserDetails;
 
