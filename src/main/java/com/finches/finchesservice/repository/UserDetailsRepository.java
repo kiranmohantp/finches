@@ -5,4 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface UserDetailsRepository extends MongoRepository<UserDetails, String> {
     UserDetails getByUserName(String userName);
+    UserDetails getById(String id);
+
 }

@@ -6,7 +6,6 @@ public class InvalidCredentialsException extends RuntimeException {
     private CommonMessages commonMessages;
 
     public InvalidCredentialsException(CommonMessages commonMessages) {
-        super();
         this.commonMessages = commonMessages;
     }
 

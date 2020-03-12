@@ -15,23 +15,28 @@ import java.util.function.Function;
 
 @Component
 public class JwtHelper {
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
-    public static final String NAME = "userName";
+    private static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    private static final String NAME = "userName";
 
     @Value("${jwt.secret}")
     private String secret;
 
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserJwtDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         setDetailsToClaimMap(claims, userDetails);
-        return doGenerateToken(claims, userDetails.getId());
+        return doGenerateToken(claims, userDetails.getEncodedId());
     }
 
     public Boolean validateToken(String token, UserJwtDetails userJwtDetails) {
         final String encodedId = getEncodedIdFromToken(token);
         return (encodedId.equals(userJwtDetails.getEncodedId()) && !isTokenExpired(token));
     }
+
+    public String getEncodedId(String token) {
+        return getEncodedIdFromToken(token);
+    }
+
 
     private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
@@ -46,7 +51,7 @@ public class JwtHelper {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    private void setDetailsToClaimMap(Map<String, Object> claims, UserDetails userDetails) {
+    private void setDetailsToClaimMap(Map<String, Object> claims, UserJwtDetails userDetails) {
         claims.put(NAME, userDetails.getUserName());
     }
 

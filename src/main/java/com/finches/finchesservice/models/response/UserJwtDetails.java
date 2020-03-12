@@ -19,4 +19,12 @@ public class UserJwtDetails {
     public void setEncodedId(String encodedId) {
         this.encodedId = encodedId;
     }
+
+    @Override
+    public String toString() {
+        return "UserJwtDetails{" +
+                "encodedId='" + encodedId + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }
