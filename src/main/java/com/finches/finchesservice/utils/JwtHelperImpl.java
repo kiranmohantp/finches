@@ -1,6 +1,7 @@
 package com.finches.finchesservice.utils;
 
 import com.finches.finchesservice.models.response.UserJwtDetails;
+import com.finches.finchesservice.utils.contracts.JwtHelper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,7 +14,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Component
-public class JwtHelper {
+public class JwtHelperImpl implements JwtHelper {
     private static final long JWT_TOKEN_VALIDITY = 5L * 60 * 60;
     private static final String NAME = "userName";
 
@@ -21,17 +22,20 @@ public class JwtHelper {
     private String secret;
 
 
+    @Override
     public String generateToken(UserJwtDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
         setDetailsToClaimMap(claims, userDetails);
         return doGenerateToken(claims, userDetails.getEncodedId());
     }
 
+    @Override
     public Boolean validateToken(String token, UserJwtDetails userJwtDetails) {
         final String encodedId = getEncodedIdFromToken(token);
         return (encodedId.equals(userJwtDetails.getEncodedId()) && !isTokenExpired(token));
     }
 
+    @Override
     public String getEncodedId(String token) {
         return getEncodedIdFromToken(token);
     }

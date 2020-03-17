@@ -1,24 +1,15 @@
-package com.finches.finchesservice.entities;
+package com.finches.finchesservice.models.entitymodels;
 
-import com.mongodb.lang.NonNull;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.Objects;
 
-@Document("UserDetails")
-public class UserDetails {
-    @NonNull
-    @Id
+public class UserDetailsModel {
     private String id;
-    @NonNull
     private String userName;
-    @NonNull
     private String name;
-    @NonNull
     private String email;
-    @NonNull
     private String password;
 
-    public UserDetails(String id, String userName, String name, String email, String password) {
+    public UserDetailsModel(String id, String userName, String name, String email, String password) {
         this.id = id;
         this.userName = userName;
         this.name = name;
@@ -44,5 +35,18 @@ public class UserDetails {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDetailsModel that = (UserDetailsModel) o;
+        return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

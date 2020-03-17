@@ -1,11 +1,11 @@
-package com.finches.finchesservice.mappers.entity_to_response;
+package com.finches.finchesservice.mappers;
 
 import com.finches.finchesservice.entities.UserDetails;
-import com.finches.finchesservice.mappers.Mapper;
+import com.finches.finchesservice.mappers.contracts.Mapper;
 import com.finches.finchesservice.models.response.UserJwtDetails;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("userDetailsToUserJwtDetailsMapper")
 public class UserDetailsToUserJwtDetailsMapper implements Mapper<UserDetails, UserJwtDetails> {
 
     @Override

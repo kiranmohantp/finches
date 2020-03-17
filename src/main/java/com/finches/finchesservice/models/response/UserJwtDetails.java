@@ -1,5 +1,7 @@
 package com.finches.finchesservice.models.response;
 
+import java.util.Objects;
+
 public class UserJwtDetails {
     private String encodedId;
     private String userName;
@@ -21,10 +23,25 @@ public class UserJwtDetails {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserJwtDetails that = (UserJwtDetails) o;
+        return Objects.equals(getEncodedId(), that.getEncodedId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEncodedId());
+    }
+
+    @Override
     public String toString() {
         return "UserJwtDetails{" +
                 "encodedId='" + encodedId + '\'' +
                 ", userName='" + userName + '\'' +
                 '}';
+
+
     }
 }

@@ -1,4 +1,4 @@
-package com.finches.finchesservice.mappers;
+package com.finches.finchesservice.mappers.contracts;
 
 public interface Mapper<A, B> {
     B mapFromAToB(A object1);

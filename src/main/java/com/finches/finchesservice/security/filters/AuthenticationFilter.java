@@ -2,8 +2,8 @@ package com.finches.finchesservice.security.filters;
 
 import com.finches.finchesservice.exceptions.apiexceptions.NoDataFoundException;
 import com.finches.finchesservice.models.response.UserJwtDetails;
-import com.finches.finchesservice.services.UserDetailsService;
-import com.finches.finchesservice.utils.JwtHelper;
+import com.finches.finchesservice.services.business.UserDetailsServiceImpl;
+import com.finches.finchesservice.utils.contracts.JwtHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,7 +24,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtHelper jwtHelper;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
