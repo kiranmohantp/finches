@@ -1,11 +1,9 @@
 package com.finches.finchesservice.security.filters;
 
-import com.finches.finchesservice.entities.UserDetails;
 import com.finches.finchesservice.exceptions.apiexceptions.NoDataFoundException;
 import com.finches.finchesservice.models.response.UserJwtDetails;
 import com.finches.finchesservice.services.UserDetailsService;
 import com.finches.finchesservice.utils.JwtHelper;
-import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,9 +19,8 @@ import java.io.IOException;
 
 @Component
 public class AuthenticationFilter extends OncePerRequestFilter {
-    private final String AUTHORIZATION = "Authorization";
-    private final String BEARER = "Bearer ";
-
+    private final static String AUTHORIZATION = "Authorization";
+    private final static String BEARER = "Bearer ";
     @Autowired
     private JwtHelper jwtHelper;
     @Autowired
@@ -49,7 +46,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         if (encodedId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             try {
                 UserJwtDetails userJwtDetails = this.userDetailsService.getUserDataForAuthenticationByEncodedId(encodedId);
-                if (jwtHelper.validateToken(jwtToken, userJwtDetails)) {
+                if (Boolean.TRUE.equals(jwtHelper.validateToken(jwtToken, userJwtDetails))) {
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                             userJwtDetails, null, null);
                     usernamePasswordAuthenticationToken

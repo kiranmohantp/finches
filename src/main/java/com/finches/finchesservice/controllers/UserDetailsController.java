@@ -5,7 +5,6 @@ import com.finches.finchesservice.repository.UserDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +15,7 @@ public class UserDetailsController {
     @Autowired
     private UserDetailsRepository userDetailsRepository;
 
-    private final String CREATE_USER = "";
+    private static final String CREATE_USER = "";
 
 
     @PostMapping(CREATE_USER)

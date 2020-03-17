@@ -1,6 +1,5 @@
 package com.finches.finchesservice.utils;
 
-import com.finches.finchesservice.entities.UserDetails;
 import com.finches.finchesservice.models.response.UserJwtDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -15,7 +14,7 @@ import java.util.function.Function;
 
 @Component
 public class JwtHelper {
-    private static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    private static final long JWT_TOKEN_VALIDITY = 5L * 60 * 60;
     private static final String NAME = "userName";
 
     @Value("${jwt.secret}")

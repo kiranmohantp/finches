@@ -17,21 +17,19 @@ public class UserDetailsService {
     @Autowired
     private UserDetailsToUserJwtDetailsMapper userDetailsToUserJwtDetailsMapper;
 
-    public UserJwtDetails getUserDataForAuthenticationByUserName(String userName) throws InvalidCredentialsException {
+    public UserJwtDetails getUserDataForAuthenticationByUserName(String userName) {
         UserDetails userDetails = userDetailsRepository.getByUserName(userName);
         if (userDetails == null) {
             throw new InvalidCredentialsException(CommonMessages.NO_USER_FOUND);
         }
-        UserJwtDetails userJwtDetails = userDetailsToUserJwtDetailsMapper.mapFromAToB(userDetails);
-        return userJwtDetails;
+        return userDetailsToUserJwtDetailsMapper.mapFromAToB(userDetails);
     }
-    public UserJwtDetails getUserDataForAuthenticationByEncodedId(String encodedId) throws NoDataFoundException {
+    public UserJwtDetails getUserDataForAuthenticationByEncodedId(String encodedId) {
         UserDetails userDetails = userDetailsRepository.getById(encodedId);
         if (userDetails == null) {
             throw new NoDataFoundException(CommonMessages.NO_DATA_FOUND);
         }
-        UserJwtDetails userJwtDetails = userDetailsToUserJwtDetailsMapper.mapFromAToB(userDetails);
-        return userJwtDetails;
+        return userDetailsToUserJwtDetailsMapper.mapFromAToB(userDetails);
     }
 
 }
