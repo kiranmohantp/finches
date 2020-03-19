@@ -1,16 +1,16 @@
 package com.finches.finchesservice.models.response;
 
-import com.finches.finchesservice.constents.messages.CommonErrorMessages;
+import com.finches.finchesservice.constents.messages.MappedError;
 
 import java.util.Objects;
 
-public class ErrorResponse {
+public class GeneralErrorResponse {
     private String code;
     private String message;
 
-    public ErrorResponse(CommonErrorMessages commonMessages) {
-        this.code = commonMessages.getCode();
-        this.message = commonMessages.getMessage();
+    public GeneralErrorResponse(MappedError mappedError) {
+        this.code = mappedError.getCode();
+        this.message = mappedError.getMessage();
     }
 
     public String getCode() {
@@ -33,7 +33,7 @@ public class ErrorResponse {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ErrorResponse that = (ErrorResponse) o;
+        GeneralErrorResponse that = (GeneralErrorResponse) o;
         return Objects.equals(getCode(), that.getCode());
     }
 

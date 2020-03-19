@@ -1,5 +1,7 @@
 package com.finches.finchesservice.security.config;
 
+import com.finches.finchesservice.constents.api.LoginEndPoints;
+import com.finches.finchesservice.constents.api.UserEndPoints;
 import com.finches.finchesservice.controllers.contracts.LoginController;
 import com.finches.finchesservice.controllers.contracts.UserDetailsController;
 import com.finches.finchesservice.security.filters.AuthenticationFilter;
@@ -30,8 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(LoginController.LOGIN_URL).permitAll()
-                .antMatchers(HttpMethod.POST, UserDetailsController.USER_ENDPOINT).permitAll().anyRequest().authenticated()
+                .antMatchers(LoginEndPoints.LOGIN_PATH).permitAll()
+                .antMatchers(HttpMethod.POST, UserEndPoints.USER_PATH).permitAll().anyRequest().authenticated()
                 .and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

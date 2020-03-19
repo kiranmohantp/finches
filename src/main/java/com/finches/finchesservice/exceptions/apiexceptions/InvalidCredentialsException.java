@@ -1,15 +1,16 @@
 package com.finches.finchesservice.exceptions.apiexceptions;
 
-import com.finches.finchesservice.constents.messages.CommonErrorMessages;
+import com.finches.finchesservice.constents.messages.ErrorMappingProvider;
+import com.finches.finchesservice.constents.messages.MappedError;
 
 public class InvalidCredentialsException extends Exception {
-    private final CommonErrorMessages commonMessages;
+    private final MappedError error;
 
-    public InvalidCredentialsException(CommonErrorMessages commonMessages) {
-        this.commonMessages = commonMessages;
+    public InvalidCredentialsException(MappedError error) {
+        this.error = error;
     }
 
-    public CommonErrorMessages getCommonMessages() {
-        return commonMessages;
+    public MappedError getError() {
+        return error;
     }
 }

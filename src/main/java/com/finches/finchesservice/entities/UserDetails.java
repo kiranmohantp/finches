@@ -1,21 +1,26 @@
 package com.finches.finchesservice.entities;
 
-import com.mongodb.lang.NonNull;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Document("UserDetails")
 public class UserDetails {
-    @NonNull
-    @Id
     private String id;
-    @NonNull
+    @NotNull(message = "notnull")
+    @Size(min = 4, max = 50, message = "minmax.username")
     private String userName;
-    @NonNull
+    @Size(min = 3, max = 50, message = "minmax.name")
+    @NotNull(message = "notnull")
     private String name;
-    @NonNull
+    @NotNull(message = "notnull")
+    @Email(message = "invalid.email")
+    @Size(min = 3, max = 200, message = "minmax.email")
     private String email;
-    @NonNull
+    @Size(min = 8, max = 100, message = "minmax.password")
+    @NotNull(message ="notnull")
     private String password;
 
     public UserDetails(String id, String userName, String name, String email, String password) {

@@ -1,15 +1,16 @@
 package com.finches.finchesservice.exceptions.apiexceptions;
 
-import com.finches.finchesservice.constents.messages.CommonErrorMessages;
+import com.finches.finchesservice.constents.messages.ErrorMappingProvider;
+import com.finches.finchesservice.constents.messages.MappedError;
 
 public class DuplicateException extends Exception {
-    private final CommonErrorMessages commonMessages;
+    private final MappedError error;
 
-    public DuplicateException(CommonErrorMessages commonMessages) {
-        this.commonMessages = commonMessages;
+    public DuplicateException(MappedError error) {
+        this.error = error;
     }
 
-    public CommonErrorMessages getCommonMessages() {
-        return commonMessages;
+    public MappedError getError() {
+        return error;
     }
 }

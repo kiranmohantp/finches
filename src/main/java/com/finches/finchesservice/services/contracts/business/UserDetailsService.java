@@ -5,11 +5,15 @@ import com.finches.finchesservice.exceptions.apiexceptions.NoDataFoundException;
 import com.finches.finchesservice.models.entitymodels.UserDetailsModel;
 import com.finches.finchesservice.models.request.LoginRequest;
 import com.finches.finchesservice.models.response.UserJwtDetails;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+
+@Validated
 public interface UserDetailsService {
     UserJwtDetails getUserDataForAuthenticationByUserName(LoginRequest loginRequest) throws NoDataFoundException, InvalidCredentialsException;
 
     UserJwtDetails getUserDataForAuthenticationByEncodedId(String encodedId) throws NoDataFoundException;
 
-    UserDetailsModel save(UserDetailsModel userDetails);
+    UserDetailsModel save(@Valid UserDetailsModel userDetails);
 }

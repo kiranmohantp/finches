@@ -1,15 +1,16 @@
 package com.finches.finchesservice.exceptions.apiexceptions;
 
-import com.finches.finchesservice.constents.messages.CommonErrorMessages;
+import com.finches.finchesservice.constents.messages.ErrorMappingProvider;
+import com.finches.finchesservice.constents.messages.MappedError;
 
 public class NoDataFoundException extends Exception {
-    private final CommonErrorMessages commonMessages;
+    private final MappedError mappedError;
 
-    public NoDataFoundException(CommonErrorMessages commonMessages) {
-        this.commonMessages = commonMessages;
+    public NoDataFoundException(MappedError mappedError) {
+        this.mappedError = mappedError;
     }
 
-    public CommonErrorMessages getCommonMessages() {
-        return commonMessages;
+    public MappedError getMappedError() {
+        return mappedError;
     }
 }
