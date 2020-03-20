@@ -1,7 +1,5 @@
 package com.finches.finchesservice.security.config;
 
-import com.finches.finchesservice.constents.api.LoginEndPoints;
-import com.finches.finchesservice.constents.api.UserEndPoints;
 import com.finches.finchesservice.controllers.contracts.LoginController;
 import com.finches.finchesservice.controllers.contracts.UserDetailsController;
 import com.finches.finchesservice.security.filters.AuthenticationFilter;
@@ -17,10 +15,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private final String LOGIN = linkTo(methodOn(LoginController.class).loginUser(null)).toUri().toString();
+    private final String USER = linkTo(methodOn(UserDetailsController.class).save(null)).toUri().toString();
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @Autowired
@@ -32,8 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(LoginEndPoints.LOGIN_PATH).permitAll()
-                .antMatchers(HttpMethod.POST, UserEndPoints.USER_PATH).permitAll().anyRequest().authenticated()
+                .antMatchers(LOGIN).permitAll()
+                .antMatchers(HttpMethod.POST, USER).permitAll().anyRequest().authenticated()
                 .and().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

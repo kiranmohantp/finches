@@ -2,7 +2,7 @@ package com.finches.finchesservice.models.response;
 
 import java.util.Objects;
 
-public class UserJwtDetails {
+public class JwtUserPayload {
     private String encodedId;
     private String userName;
 
@@ -26,7 +26,7 @@ public class UserJwtDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserJwtDetails that = (UserJwtDetails) o;
+        JwtUserPayload that = (JwtUserPayload) o;
         return Objects.equals(getEncodedId(), that.getEncodedId());
     }
 

@@ -4,7 +4,7 @@ import com.finches.finchesservice.controllers.contracts.LoginController;
 import com.finches.finchesservice.exceptions.apiexceptions.InvalidCredentialsException;
 import com.finches.finchesservice.exceptions.apiexceptions.NoDataFoundException;
 import com.finches.finchesservice.models.request.LoginRequest;
-import com.finches.finchesservice.models.response.UserJwtDetails;
+import com.finches.finchesservice.models.response.JwtUserPayload;
 import com.finches.finchesservice.services.contracts.business.UserDetailsService;
 import com.finches.finchesservice.utils.contracts.JwtHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class LoginControllerImpl implements LoginController {
 
     @Override
     public ResponseEntity<String> loginUser(LoginRequest loginRequest) throws InvalidCredentialsException, NoDataFoundException {
-        UserJwtDetails userDetails = userDetailsService.getUserDataForAuthenticationByUserName(loginRequest);
+        JwtUserPayload userDetails = userDetailsService.getUserDataForAuthenticationByUserName(loginRequest);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(jwtHelper.generateToken(userDetails));

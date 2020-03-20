@@ -1,11 +1,11 @@
 package com.finches.finchesservice.utils.contracts;
 
-import com.finches.finchesservice.models.response.UserJwtDetails;
+import com.finches.finchesservice.models.response.JwtUserPayload;
 
 public interface JwtHelper {
-    String generateToken(UserJwtDetails userDetails);
+    String generateToken(JwtUserPayload userDetails);
 
-    Boolean validateToken(String token, UserJwtDetails userJwtDetails);
+    Boolean validateToken(String token, JwtUserPayload userJwtDetails);
 
     String getEncodedId(String token);
 }

@@ -1,9 +1,8 @@
 package com.finches.finchesservice.exceptions.apiexceptions;
 
-import com.finches.finchesservice.constents.messages.ErrorMappingProvider;
 import com.finches.finchesservice.constents.messages.MappedError;
 
-public class DuplicateException extends Exception {
+public class DuplicateException extends RuntimeException {
     private final MappedError error;
 
     public DuplicateException(MappedError error) {

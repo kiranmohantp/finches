@@ -1,7 +1,7 @@
 package com.finches.finchesservice.security.filters;
 
 import com.finches.finchesservice.exceptions.apiexceptions.NoDataFoundException;
-import com.finches.finchesservice.models.response.UserJwtDetails;
+import com.finches.finchesservice.models.response.JwtUserPayload;
 import com.finches.finchesservice.services.business.UserDetailsServiceImpl;
 import com.finches.finchesservice.utils.contracts.JwtHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         }
         if (encodedId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             try {
-                UserJwtDetails userJwtDetails = this.userDetailsService.getUserDataForAuthenticationByEncodedId(encodedId);
+                JwtUserPayload userJwtDetails = this.userDetailsService.getUserDataForAuthenticationByEncodedId(encodedId);
                 if (Boolean.TRUE.equals(jwtHelper.validateToken(jwtToken, userJwtDetails))) {
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
                             userJwtDetails, null, null);

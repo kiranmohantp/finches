@@ -1,14 +1,18 @@
 package com.finches.finchesservice.models.entitymodels;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-public class UserDetailsModel {
+public class UserDetailsModel extends RepresentationModel<UserDetailsModel> {
     private String id;
     @NotNull(message = "notnull")
     @Size(min = 4, max = 50, message = "minmax.username")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "invalid.username")
     private String userName;
     @Size(min = 3, max = 50, message = "minmax.name")
     @NotNull(message = "notnull")
@@ -18,7 +22,7 @@ public class UserDetailsModel {
     @Size(min = 3, max = 200, message = "minmax.email")
     private String email;
     @Size(min = 8, max = 100, message = "minmax.password")
-    @NotNull(message ="notnull")
+    @NotNull(message = "notnull")
     private String password;
 
     public UserDetailsModel(String id, String userName, String name, String email, String password) {

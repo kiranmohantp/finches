@@ -1,6 +1,8 @@
 package com.finches.finchesservice.exceptionhandler;
 
-import com.finches.finchesservice.models.response.ValidationErrorResponse;
+import com.finches.finchesservice.constents.messages.MappedError;
+import com.finches.finchesservice.exceptions.apiexceptions.DuplicateException;
+import com.finches.finchesservice.models.response.ErrorResponse;
 import com.finches.finchesservice.utils.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,29 +20,30 @@ public class ValidationExceptionHandler {
     private HttpServletRequest httpServletRequest;
 
     @ExceptionHandler(ConstraintViolationException.class)
-    private ResponseEntity<ValidationErrorResponse> constraintViolationHandler(ConstraintViolationException exception) {
-        ValidationErrorResponse validationErrorResponse = new ValidationErrorResponse();
+    private ResponseEntity<ErrorResponse> constraintViolationHandler(ConstraintViolationException exception) {
+        ErrorResponse errorResponse = new ErrorResponse();
         exception.getConstraintViolations().forEach(constraintViolation -> {
             String[] path = constraintViolation.getPropertyPath().toString().split("\\.");
-            validationErrorResponse.getMessages()
-                    .add(new StringBuilder(path[path.length - 1])
-                            .append(" : ")
-                            .append(Utility.getMessageFromResourceBundle(httpServletRequest, constraintViolation.getMessage())).toString());
+            errorResponse.getMappedErrors()
+                    .add(new MappedError(path[path.length - 1], Utility.getMessageFromResourceBundle(httpServletRequest, constraintViolation.getMessage())));
         });
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationErrorResponse);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    private ResponseEntity<ValidationErrorResponse> methodArgumentNotValidHandler(MethodArgumentNotValidException exception) {
-        ValidationErrorResponse validationErrorResponse = new ValidationErrorResponse();
+    private ResponseEntity<ErrorResponse> methodArgumentNotValidHandler(MethodArgumentNotValidException exception) {
+        ErrorResponse errorResponse = new ErrorResponse();
         exception.getBindingResult().getFieldErrors().forEach(fieldError ->
-                validationErrorResponse.getMessages()
-                        .add(new StringBuilder(fieldError.getField())
-                                .append(" : ")
-                                .append(Utility.getMessageFromResourceBundle(httpServletRequest, fieldError.getDefaultMessage())).toString())
-        );
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationErrorResponse);
+                errorResponse.getMappedErrors()
+                        .add(new MappedError(fieldError.getField(), Utility.getMessageFromResourceBundle(httpServletRequest, fieldError.getDefaultMessage()))));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
-
+    @ExceptionHandler(Exception.class)
+    private ResponseEntity<ErrorResponse> commonException(Exception exception) {
+        exception.printStackTrace();
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.getMappedErrors().add(new MappedError("unknown", "Unexpected happened!"));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+    }
 }

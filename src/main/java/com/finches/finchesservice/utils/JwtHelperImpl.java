@@ -1,6 +1,6 @@
 package com.finches.finchesservice.utils;
 
-import com.finches.finchesservice.models.response.UserJwtDetails;
+import com.finches.finchesservice.models.response.JwtUserPayload;
 import com.finches.finchesservice.utils.contracts.JwtHelper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -23,14 +23,14 @@ public class JwtHelperImpl implements JwtHelper {
 
 
     @Override
-    public String generateToken(UserJwtDetails userDetails) {
+    public String generateToken(JwtUserPayload userDetails) {
         Map<String, Object> claims = new HashMap<>();
         setDetailsToClaimMap(claims, userDetails);
         return doGenerateToken(claims, userDetails.getEncodedId());
     }
 
     @Override
-    public Boolean validateToken(String token, UserJwtDetails userJwtDetails) {
+    public Boolean validateToken(String token, JwtUserPayload userJwtDetails) {
         final String encodedId = getEncodedIdFromToken(token);
         return (encodedId.equals(userJwtDetails.getEncodedId()) && !isTokenExpired(token));
     }
@@ -54,7 +54,7 @@ public class JwtHelperImpl implements JwtHelper {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    private void setDetailsToClaimMap(Map<String, Object> claims, UserJwtDetails userDetails) {
+    private void setDetailsToClaimMap(Map<String, Object> claims, JwtUserPayload userDetails) {
         claims.put(NAME, userDetails.getUserName());
     }
 

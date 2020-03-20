@@ -15,9 +15,9 @@ public class UserDetailsModelUserDetailsMapper implements Mapper<UserDetailsMode
     @Override
     public UserDetails mapFromAToB(UserDetailsModel userDetailsModel) {
         return new UserDetails(userDetailsModel.getId(),
-                userDetailsModel.getUserName(),
+                userDetailsModel.getUserName().toLowerCase(),
                 userDetailsModel.getName(),
-                userDetailsModel.getEmail(),
+                userDetailsModel.getEmail().toLowerCase(),
                 passwordEncoder.encode(userDetailsModel.getPassword()));
     }
 

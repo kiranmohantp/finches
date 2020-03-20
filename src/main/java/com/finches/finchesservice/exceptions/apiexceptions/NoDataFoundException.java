@@ -1,9 +1,8 @@
 package com.finches.finchesservice.exceptions.apiexceptions;
 
-import com.finches.finchesservice.constents.messages.ErrorMappingProvider;
 import com.finches.finchesservice.constents.messages.MappedError;
 
-public class NoDataFoundException extends Exception {
+public class NoDataFoundException extends RuntimeException {
     private final MappedError mappedError;
 
     public NoDataFoundException(MappedError mappedError) {
