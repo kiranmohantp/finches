@@ -66,4 +66,15 @@ public class UserDetailsModel extends RepresentationModel<UserDetailsModel> {
     public int hashCode() {
         return Objects.hash(getId());
     }
+
+    @Override
+    public String toString() {
+        return "UserDetailsModel{" +
+                "id='" + id + '\'' +
+                ", userName='" + userName + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

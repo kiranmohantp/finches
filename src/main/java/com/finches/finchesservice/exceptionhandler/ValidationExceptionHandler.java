@@ -1,9 +1,9 @@
 package com.finches.finchesservice.exceptionhandler;
 
 import com.finches.finchesservice.constents.messages.MappedError;
-import com.finches.finchesservice.exceptions.apiexceptions.DuplicateException;
+import com.finches.finchesservice.exceptions.apiexceptions.NoIdFoundException;
 import com.finches.finchesservice.models.response.ErrorResponse;
-import com.finches.finchesservice.utils.Utility;
+import com.finches.finchesservice.utils.MessageUtility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class ValidationExceptionHandler {
         exception.getConstraintViolations().forEach(constraintViolation -> {
             String[] path = constraintViolation.getPropertyPath().toString().split("\\.");
             errorResponse.getMappedErrors()
-                    .add(new MappedError(path[path.length - 1], Utility.getMessageFromResourceBundle(httpServletRequest, constraintViolation.getMessage())));
+                    .add(new MappedError(path[path.length - 1], MessageUtility.getMessageFromResourceBundle(httpServletRequest, constraintViolation.getMessage())));
         });
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
@@ -35,7 +35,14 @@ public class ValidationExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse();
         exception.getBindingResult().getFieldErrors().forEach(fieldError ->
                 errorResponse.getMappedErrors()
-                        .add(new MappedError(fieldError.getField(), Utility.getMessageFromResourceBundle(httpServletRequest, fieldError.getDefaultMessage()))));
+                        .add(new MappedError(fieldError.getField(), MessageUtility.getMessageFromResourceBundle(httpServletRequest, fieldError.getDefaultMessage()))));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
+    @ExceptionHandler(NoIdFoundException.class)
+    private ResponseEntity<ErrorResponse> methodNoIdFoundException(NoIdFoundException exception) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.getMappedErrors().add(exception.getMappedError());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 

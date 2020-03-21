@@ -41,7 +41,5 @@ public class JwtUserPayload {
                 "encodedId='" + encodedId + '\'' +
                 ", userName='" + userName + '\'' +
                 '}';
-
-
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Document("UserDetails")
 public class UserDetails {
@@ -20,8 +21,12 @@ public class UserDetails {
     @Size(min = 3, max = 200, message = "minmax.email")
     private String email;
     @Size(min = 8, max = 100, message = "minmax.password")
-    @NotNull(message ="notnull")
+    @NotNull(message = "notnull")
     private String password;
+
+    public UserDetails(String id) {
+        this.id = id;
+    }
 
     public UserDetails(String id, String userName, String name, String email, String password) {
         this.id = id;
@@ -49,5 +54,29 @@ public class UserDetails {
 
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDetails that = (UserDetails) o;
+        return Objects.equals(getId(), that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "UserDetails{" +
+                "id='" + id + '\'' +
+                ", userName='" + userName + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

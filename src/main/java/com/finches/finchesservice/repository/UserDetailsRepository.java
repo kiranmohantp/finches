@@ -8,6 +8,4 @@ public interface UserDetailsRepository extends MongoRepository<UserDetails, Stri
 
     UserDetails getByEmail(String email);
 
-    UserDetails getById(String id);
-
 }

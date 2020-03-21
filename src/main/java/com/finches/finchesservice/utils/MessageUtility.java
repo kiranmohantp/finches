@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class Utility {
+public class MessageUtility {
     private static final String LOCALE = "locale";
     private static final String RESOURCE_BUNDLE = "i18n.ErrorMapping";
 
@@ -26,6 +26,6 @@ public class Utility {
     }
 
     public static String getMessageFromResourceBundle(HttpServletRequest httpServletRequest, String code) {
-        return ResourceBundle.getBundle(RESOURCE_BUNDLE, Utility.returnLocale(httpServletRequest)).getString(code);
+        return ResourceBundle.getBundle(RESOURCE_BUNDLE, MessageUtility.returnLocale(httpServletRequest)).getString(code);
     }
 }

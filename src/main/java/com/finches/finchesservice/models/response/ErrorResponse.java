@@ -15,4 +15,11 @@ public class ErrorResponse {
     public ErrorResponse() {
         this.mappedErrors = new ArrayList<>(2);
     }
+
+    @Override
+    public String toString() {
+        return "ErrorResponse{" +
+                "mappedErrors=" + mappedErrors +
+                '}';
+    }
 }
