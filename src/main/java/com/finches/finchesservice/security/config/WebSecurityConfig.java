@@ -1,7 +1,7 @@
 package com.finches.finchesservice.security.config;
 
-import com.finches.finchesservice.controllers.contracts.LoginController;
-import com.finches.finchesservice.controllers.contracts.UserDetailsController;
+import com.finches.finchesservice.controllers.LoginControllerImpl;
+import com.finches.finchesservice.controllers.UserDetailsControllerImpl;
 import com.finches.finchesservice.security.filters.AuthenticationFilter;
 import com.finches.finchesservice.security.others.JwtAuthenticationEntryPoint;
 import com.finches.finchesservice.services.business.UserDetailsServiceImpl;
@@ -22,8 +22,8 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final String LOGIN = linkTo(methodOn(LoginController.class).loginUser(null)).toUri().toString();
-    private final String USER = linkTo(methodOn(UserDetailsController.class).save(null)).toUri().toString();
+    private final String LOGIN = linkTo(methodOn(LoginControllerImpl.class).loginUser(null)).toUri().toString();
+    private final String USER = linkTo(methodOn(UserDetailsControllerImpl.class).save(null)).toUri().toString();
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @Autowired

@@ -1,11 +1,11 @@
 package com.finches.finchesservice.exceptions.apiexceptions;
 
-import com.finches.finchesservice.constents.messages.MappedError;
+import com.finches.finchesservice.models.response.MappedError;
 
-public class NoIdFoundException extends RuntimeException {
+public class DataIntegrityException extends RuntimeException {
     private final MappedError mappedError;
 
-    public NoIdFoundException(MappedError mappedError) {
+    public DataIntegrityException(MappedError mappedError) {
         this.mappedError = mappedError;
     }
 

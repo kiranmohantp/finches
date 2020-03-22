@@ -1,6 +1,6 @@
 package com.finches.finchesservice.utils;
 
-import com.finches.finchesservice.constents.messages.MappedError;
+import com.finches.finchesservice.models.response.MappedError;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;

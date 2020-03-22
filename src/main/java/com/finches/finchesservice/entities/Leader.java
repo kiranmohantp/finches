@@ -1,16 +1,34 @@
 package com.finches.finchesservice.entities;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class Leader {
     private String id;
+    @NotNull(message = "notnull")
+    @Size(min = 3, max = 50, message = "minmax.name")
     private String name;
+    @Pattern(regexp = "", message = "invalid.ip")
     private String ip;
+    private Integer noOfFinchesAssigned;
+    @NotNull(message = "notnull")
+    private Integer maxCapacity;
 
-    public Leader(String id, String name, String ip) {
+    public Leader() {
+    }
+
+    public Leader(String id) {
+        this.id = id;
+    }
+
+    public Leader(String id, String name, String ip, Integer noOfFinchesAssigned, Integer maxCapacity) {
         this.id = id;
         this.name = name;
         this.ip = ip;
+        this.noOfFinchesAssigned = noOfFinchesAssigned;
+        this.maxCapacity = maxCapacity;
     }
 
     public String getId() {
@@ -23,6 +41,14 @@ public class Leader {
 
     public String getIp() {
         return ip;
+    }
+
+    public Integer getNoOfFinchesAssigned() {
+        return noOfFinchesAssigned;
+    }
+
+    public Integer getMaxCapacity() {
+        return maxCapacity;
     }
 
     @Override
@@ -40,10 +66,12 @@ public class Leader {
 
     @Override
     public String toString() {
-        return "Leader{" +
+        return "LeaderModel{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", ip='" + ip + '\'' +
+                ", noOfFinchesAssigned=" + noOfFinchesAssigned +
+                ", maxCapacity=" + maxCapacity +
                 '}';
     }
 }

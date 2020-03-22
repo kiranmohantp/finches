@@ -12,7 +12,7 @@ public class FinchesModel {
     @Size(min = 3, max = 50, message = "minmax.name")
     private String name;
     @DBRef
-    @NotNull
+    @NotNull(message = "notnull")
     @IdNotNull
     private LeaderModel leader;
 

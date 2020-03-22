@@ -1,6 +1,5 @@
 package com.finches.finchesservice.controllers.contracts;
 
-import com.finches.finchesservice.models.entitymodels.FinchesModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

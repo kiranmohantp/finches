@@ -19,6 +19,7 @@ public class ResponseUtility {
     public static ResponseEntity deleteResponse(Object body) {
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
+
     public static ResponseEntity operationCompleted(Object body) {
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }

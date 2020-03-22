@@ -16,6 +16,13 @@ public class Finches {
     @IdNotNull
     private Leader leader;
 
+    public Finches() {
+    }
+
+    public Finches(String id) {
+        this.id = id;
+    }
+
     public Finches(String id, String name, Leader leader) {
         this.id = id;
         this.name = name;

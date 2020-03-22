@@ -1,10 +1,10 @@
-package com.finches.finchesservice.constents.messages;
+package com.finches.finchesservice.models.response;
 
-public class MappedWarnings {
+public class MappedError {
     private String code;
     private String message;
 
-    public MappedWarnings(String code, String message) {
+    public MappedError(String code, String message) {
         this.code = code;
         this.message = message;
     }

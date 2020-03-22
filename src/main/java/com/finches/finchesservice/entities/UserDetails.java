@@ -28,6 +28,9 @@ public class UserDetails {
         this.id = id;
     }
 
+    public UserDetails() {
+    }
+
     public UserDetails(String id, String userName, String name, String email, String password) {
         this.id = id;
         this.userName = userName;

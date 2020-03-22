@@ -33,6 +33,9 @@ public class UserDetailsModel extends RepresentationModel<UserDetailsModel> {
         this.password = password;
     }
 
+    public UserDetailsModel() {
+    }
+
     public String getId() {
         return id;
     }

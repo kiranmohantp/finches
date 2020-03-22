@@ -1,9 +1,12 @@
 package com.finches.finchesservice.models.request;
 
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 public class LoginRequest {
+    @NotNull(message = "notnull")
     private String userName;
+    @NotNull(message = "notnull")
     private String password;
 
     public String getUserName() {
